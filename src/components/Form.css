@@ -1,0 +1,11 @@
+.flex-container {
+    padding-top: 30px;
+    display: grid;
+    grid-gap: 60px;
+}
+
+form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+

@@ -1,0 +1,33 @@
+.extraInfos-container {
+    margin-top: 30px;
+    border-top: 1px solid #f2f2f2;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-gap: 15%;
+}
+
+.extraInfo, .extraInfoMessage, .activeMessage {
+    color: #f2f2f2;
+}
+
+.extraInfo {
+    margin-left: 5px;
+    outline: none;
+    display: block;
+    text-align: center;
+    font-size: 26px;
+    opacity: 0.7;
+    padding: 2px 2px;
+    margin-top: 10px;
+    background: none;
+    border: none;
+}
+.extraInfoMessage {
+        font-size: 25px;
+}
+.activeMessage {
+    font-weight: normal;
+}
+ .extraInfo.active {
+    opacity: 1;
+}

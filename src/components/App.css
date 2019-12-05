@@ -1,0 +1,48 @@
+body{
+    background-image: linear-gradient(#BBD2C5,#536976,#292E49);
+  background-attachment: fixed;
+}
+.app input, .checkBtn {
+    margin: 5px;
+    padding: 5px 5px;
+    border: none;
+    background-color: #BBD2C5;
+    transition: .3s;
+    color: #30523F;
+    outline: none;
+    text-transform: uppercase;
+}
+
+::placeholder {
+    color: #30523F;
+    text-transform: uppercase;
+}
+
+.app input {
+    border-bottom: 1px solid #F2F2F2;
+    opacity: 0.6;
+}
+
+.app input:focus {
+    border-bottom: 1px solid #F2F2F2;
+    opacity: 1;
+    background-color:#BBD2C5;
+}
+
+.checkBtn {
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+    text-transform: uppercase;
+    border: none; 
+    border-bottom: 1px solid #F2BB77;
+    transition: 0.3s;
+}
+
+.checkBtn:hover {
+    border-radius: 90px 30px;
+    background-color: #F2BB77;
+    color: #F2F2F2;
+}
+
+
