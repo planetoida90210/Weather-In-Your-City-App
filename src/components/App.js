@@ -11,6 +11,7 @@ class App extends Component {
 
   state = {
     value: '',
+    utcTime: '',
     time: '',
     city: '',
     sunrise: '',
@@ -20,8 +21,6 @@ class App extends Component {
     tempMin: '',
     tempMax: '',
     description: '',
-    pressure: '',
-    wind: '',
     icon: '',
     err: false,
     messageButtons : [
@@ -93,11 +92,17 @@ class App extends Component {
       })
       .then(response => response.json())
       .then(data =>{
-        const time = new Date().toLocaleTimeString()
-        const time1 = new Date().toLocaleDateString()
+        const date = new Date().toLocaleTimeString()
+        const time = [...date].slice(0,5)
+        const hours = new Date().getUTCHours()
+        const minutes = new Date().getUTCMinutes()
+        const timezone = data.timezone / 3600
+        const timeNumber = new Date().getHours()
         const sunrise = new Date(data.sys.sunrise * 1000).toLocaleTimeString() 
         const sunset = new Date(data.sys.sunset * 1000).toLocaleTimeString()
-        console.log(time1)
+        const sunriseTime = new Date(data.sys.sunrise * 1000).getHours()
+        const sunsetTime = new Date(data.sys.sunset * 1000).getHours()
+        const utcTime = hours + timezone >= 24 ? `${hours + timezone - 24}:${minutes}` : `${hours}:${minutes}`
         const iconsDay = {
           Thunderstorm: 'wi-thunderstorm',
           Drizzle: 'wi-sleet',
@@ -119,9 +124,10 @@ class App extends Component {
         }
         
         let actualIcon = data.weather[0].main
-        let icon = time >= data.sys.sunset ? iconsNight[actualIcon] : iconsDay[actualIcon] && time <= data.sys.sunrise ? iconsDay[actualIcon] : iconsNight[actualIcon]
+        let icon = timeNumber >= sunsetTime ? iconsNight[actualIcon] : iconsDay[actualIcon] 
         
         this.setState(prevState => ({
+          utcTime: utcTime,
           time: time,
           city: prevState.value,
           sunrise: sunrise,
@@ -131,8 +137,6 @@ class App extends Component {
           temp_min: data.main.temp_min,
           temp_max: data.main.temp_max,
           description: data.weather[0].main,
-          pressure: data.main.pressure,
-          wind: data.wind.speed,
           icon: icon,
           err: false,
           value: '',

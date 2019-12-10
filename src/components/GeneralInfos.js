@@ -3,11 +3,12 @@ import './GeneralInfos.css'
 
 const GeneralInfos = (props) => {
 
-    const { city, icon, temp, temp_min, temp_max, description } = props.weather   
+    const { city, utcTime , icon, temp, temp_min, temp_max, description } = props.weather   
 
     return ( 
         <React.Fragment>
          <h1 className='cityName'>{city.toUpperCase()}</h1>
+         <p className="utcTime">{utcTime}</p>
             <i className={`wi ${icon} mainIcon`}></i>
           <h2>{Math.floor(temp)}&#176;C</h2>
            <h3>

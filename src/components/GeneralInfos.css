@@ -1,4 +1,4 @@
-h1,h2,h3,h4 {
+h1,h2,h3,h4,p {
     color: #F2F2F2;
     font-weight: normal;
 }
@@ -9,7 +9,7 @@ h2{
 }
 
 h3 span {
-
+    
     display: inline-block;
     margin-left: 20px;
     margin-right: 20px;
@@ -29,4 +29,8 @@ h3 {
     margin-top: 15px;
     font-size: 120px;
     color: #F2F2F2;
+}
+
+.utcTime {
+    opacity: 0.6;
 }
