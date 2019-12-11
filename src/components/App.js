@@ -101,8 +101,11 @@ class App extends Component {
         const sunrise = new Date(data.sys.sunrise * 1000).toLocaleTimeString() 
         const sunset = new Date(data.sys.sunset * 1000).toLocaleTimeString()
         const sunriseTime = new Date(data.sys.sunrise * 1000).getHours()
+        const sunriseMinutes = new Date(data.sys.sunrise * 1000).getMinutes()
         const sunsetTime = new Date(data.sys.sunset * 1000).getHours()
-        const utcTime = hours + timezone >= 24 ? `${hours + timezone - 24}:${minutes}` : `${hours}:${minutes}`
+        const utcTime = hours + timezone >= 24 ? `0${hours + timezone - 24}:${minutes < 10 ? `0${minutes}` : minutes}` : `${hours + timezone}:${minutes < 10 ? `0${minutes}` : minutes}`
+
+        console.log(`${sunriseTime + timezone} : ${sunriseMinutes}`)
         const iconsDay = {
           Thunderstorm: 'wi-thunderstorm',
           Drizzle: 'wi-sleet',
