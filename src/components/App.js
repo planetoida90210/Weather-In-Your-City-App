@@ -98,14 +98,19 @@ class App extends Component {
         const minutes = new Date().getUTCMinutes()
         const timezone = data.timezone / 3600
         const timeNumber = new Date().getHours()
-        const sunrise = new Date(data.sys.sunrise * 1000).toLocaleTimeString() 
-        const sunset = new Date(data.sys.sunset * 1000).toLocaleTimeString()
-        const sunriseTime = new Date(data.sys.sunrise * 1000).getHours()
+        const sunsetCssTime = new Date(data.sys.sunset * 1000).getHours()
+  
+        const sunriseTime = new Date(data.sys.sunrise * 1000).getUTCHours()
+        const sunsetTime = new Date(data.sys.sunset * 1000).getUTCHours()
         const sunriseMinutes = new Date(data.sys.sunrise * 1000).getMinutes()
-        const sunsetTime = new Date(data.sys.sunset * 1000).getHours()
-        const utcTime = hours + timezone >= 24 ? `0${hours + timezone - 24}:${minutes < 10 ? `0${minutes}` : minutes}` : `${hours + timezone}:${minutes < 10 ? `0${minutes}` : minutes}`
+        const sunsetMinutes = new Date(data.sys.sunset * 1000).getMinutes()
 
-        console.log(`${sunriseTime + timezone} : ${sunriseMinutes}`)
+        const utcTime = hours + timezone >= 24 ? `0${hours + timezone - 24}:${minutes < 10 ? `0${minutes}` : minutes}` : `${hours + timezone}:${minutes < 10 ? `0${minutes}` : minutes}`
+        const sunrise = sunriseTime + timezone >= 24 ? `0${sunriseTime + timezone - 24}:${sunriseMinutes < 10 ? `0${sunriseMinutes}` : sunriseMinutes}` : `${sunriseTime + timezone}:${sunriseMinutes < 10 ? `0${sunriseMinutes}` : sunriseMinutes}`
+        const sunset = sunsetTime + timezone >= 24 ? `0${sunsetTime + timezone - 24}:${sunsetMinutes < 10 ? `0${sunsetMinutes}` : sunsetMinutes}` : `${sunsetTime + timezone}:${sunsetMinutes < 10 ? `0${sunsetMinutes}` : sunsetMinutes}`
+
+      
+     
         const iconsDay = {
           Thunderstorm: 'wi-thunderstorm',
           Drizzle: 'wi-sleet',
@@ -127,7 +132,7 @@ class App extends Component {
         }
         
         let actualIcon = data.weather[0].main
-        let icon = timeNumber >= sunsetTime ? iconsNight[actualIcon] : iconsDay[actualIcon] 
+        let icon = timeNumber >= sunsetCssTime ? iconsNight[actualIcon] : iconsDay[actualIcon] 
         
         this.setState(prevState => ({
           utcTime: utcTime,
